@@ -28,12 +28,12 @@
             <Image url="@../assets/login.jpg" />
          </image>
       </ImageView>
-      <TextField fx:id="txtEmail" layoutX="18.0" layoutY="101.0" prefHeight="39.0" prefWidth="319.0" promptText="email">
+      <TextField fx:id="txtEmail" layoutX="18.0" layoutY="101.0" prefHeight="39.0" prefWidth="319.0" promptText="email" text="p@gmail.com">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtPassword" layoutX="18.0" layoutY="159.0" prefHeight="39.0" prefWidth="319.0" promptText="password">
+      <TextField fx:id="txtPassword" layoutX="18.0" layoutY="159.0" prefHeight="39.0" prefWidth="319.0" promptText="password" text="1234">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -43,7 +43,7 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Hyperlink layoutX="220.0" layoutY="209.0" text="forgot password?" underline="true">
+      <Hyperlink layoutX="220.0" layoutY="209.0" onAction="#forgotPasswordOnAction" text="forgot password?" underline="true">
          <font>
             <Font size="14.0" />
          </font>
