@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="context" prefHeight="504.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.PSDeveloper.PSClassManagement.controller.DashboardFormController">
+   <children>
+      <Label layoutX="196.0" layoutY="14.0" text="PS ClASS MANAGEMENT" textFill="#2c3e50">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Separator layoutX="12.0" layoutY="81.0" prefHeight="0.0" prefWidth="571.0" />
+      <JFXButton layoutX="15.0" layoutY="95.0" onAction="#btnProgrammeOnAction" prefHeight="160.0" prefWidth="180.0" style="-fx-background-color: #3498db;" text="Programmes" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      <Label layoutX="18.0" layoutY="51.0" text="Dashboard" textFill="#2c2c54">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="211.0" layoutY="95.0" onAction="#btnTeachersOnAction" prefHeight="160.0" prefWidth="180.0" style="-fx-background-color: #2ecc71;" text="Teachers" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="407.0" layoutY="95.0" onAction="#btnSitudentsOnAction" prefHeight="160.0" prefWidth="180.0" style="-fx-background-color: #d35400;" text="Students" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      <ImageView fitHeight="218.0" fitWidth="571.0" layoutX="15.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/Dashboard.jpg" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="495.0" layoutY="45.0" onAction="#btnLogOutOnAction" prefHeight="30.0" prefWidth="92.0" style="-fx-background-color: #34495e;" text="Log Out" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <Label fx:id="lblDate" layoutX="211.0" layoutY="51.0" text="2023-06-13" textFill="#c0392b">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblTime" layoutX="319.0" layoutY="51.0" text="11:29:10" textFill="#c0392b">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Separator layoutX="294.0" layoutY="51.0" orientation="VERTICAL" prefHeight="20.0" prefWidth="13.0" />
+   </children>
+</AnchorPane>
