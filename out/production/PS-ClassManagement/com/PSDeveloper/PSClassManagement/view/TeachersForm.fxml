@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
@@ -8,7 +9,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane fx:id="context" prefHeight="468.0" prefWidth="644.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.PSDeveloper.PSClassManagement.controller.TeachersFormController">
    <children>
@@ -48,11 +48,6 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtTeachingProgramme" layoutX="434.0" layoutY="101.0" prefHeight="39.0" prefWidth="192.0" promptText="teaching programme">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </TextField>
       <TextField fx:id="txtSearch" layoutX="19.0" layoutY="217.0" prefHeight="39.0" prefWidth="609.0" promptText="first name">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -72,5 +67,6 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
+      <ChoiceBox fx:id="choiceBox" layoutX="432.0" layoutY="101.0" prefHeight="39.0" prefWidth="192.0" />
    </children>
 </AnchorPane>
