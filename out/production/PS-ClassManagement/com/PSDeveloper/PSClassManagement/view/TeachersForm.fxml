@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="context" prefHeight="468.0" prefWidth="644.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.PSDeveloper.PSClassManagement.controller.TeachersFormController">
+   <children>
+      <Label layoutX="214.0" layoutY="9.0" text="PS ClASS MANAGEMENT" textFill="#2c3e50">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Separator layoutX="15.0" layoutY="79.0" prefHeight="3.0" prefWidth="609.0" />
+      <Label layoutX="19.0" layoutY="49.0" text="Teachers Management" textFill="#2c2c54">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="503.0" layoutY="43.0" onAction="#btnBackToHomeOnAction" prefHeight="30.0" prefWidth="121.0" style="-fx-background-color: #34495e;" text="Back to Home" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnSaveUpdate" layoutX="434.0" layoutY="161.0" onAction="#btnSaveTeacherOnAction" prefHeight="39.0" prefWidth="192.0" style="-fx-background-color: #227093;" text="Save Teacher" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      <TextField fx:id="txtTeacherId" editable="false" layoutX="18.0" layoutY="101.0" prefHeight="39.0" prefWidth="192.0" promptText="teacher id">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtEmail" layoutX="225.0" layoutY="101.0" prefHeight="39.0" prefWidth="192.0" promptText="email">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtFullName" layoutX="18.0" layoutY="161.0" prefHeight="39.0" prefWidth="400.0" promptText="fiull name name">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtTeachingProgramme" layoutX="434.0" layoutY="101.0" prefHeight="39.0" prefWidth="192.0" promptText="teaching programme">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtSearch" layoutX="19.0" layoutY="217.0" prefHeight="39.0" prefWidth="609.0" promptText="first name">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TableView fx:id="tbl" layoutX="19.0" layoutY="270.0" prefHeight="180.0" prefWidth="609.0">
+        <columns>
+          <TableColumn fx:id="colTeacherId" prefWidth="75.0" text="teacher id" />
+          <TableColumn fx:id="colTeacherEmail" prefWidth="143.0" text="email" />
+            <TableColumn fx:id="colTeacherFullName" prefWidth="183.0" text="full name" />
+            <TableColumn fx:id="colTeachingProgramme" prefWidth="123.0" text="teaching programme" />
+            <TableColumn fx:id="colDelete" prefWidth="84.0" text="delete" />
+        </columns>
+      </TableView>
+      <JFXButton layoutX="371.0" layoutY="43.0" onAction="#btnNewTeacherOnAction" prefHeight="30.0" prefWidth="121.0" style="-fx-background-color: #2ecc71;" text="+ New Teacher" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
