@@ -16,6 +16,7 @@ public class LoginFormController {
     public AnchorPane context;
     public TextField txtEmail;
     public TextField txtPassword;
+    public static String newUser;
 
     public void btnLoginOnAction(ActionEvent actionEvent) throws RuntimeException {
         try {
@@ -30,6 +31,8 @@ public class LoginFormController {
             if(resultSet.next()){
                 if(PasswordManager.checkPassword(txtPassword.getText().trim(),resultSet.getString("password"))){
                     setUi("DashboardForm","Dashboard");
+                    newUser=txtEmail.getText();
+                    System.out.println(newUser);
                 }
                 else {
                     new Alert(Alert.AlertType.WARNING,"Password wrong! Please try again").show();

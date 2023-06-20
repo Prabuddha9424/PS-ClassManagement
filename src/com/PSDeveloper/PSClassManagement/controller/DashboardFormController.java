@@ -40,7 +40,8 @@ public class DashboardFormController {
         timeline.play();
     }
 
-    public void btnProgrammeOnAction(ActionEvent actionEvent) {
+    public void btnProgrammeOnAction(ActionEvent actionEvent) throws IOException {
+        setUi("ProgrammeForm","Programme Management");
     }
 
     public void btnTeachersOnAction(ActionEvent actionEvent) throws IOException {

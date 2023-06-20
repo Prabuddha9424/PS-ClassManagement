@@ -1,13 +1,8 @@
 package com.PSDeveloper.PSClassManagement.controller;
-
 import com.PSDeveloper.PSClassManagement.model.Student;
-import com.PSDeveloper.PSClassManagement.model.Teacher;
 import com.PSDeveloper.PSClassManagement.view.tm.StudentTm;
-import com.PSDeveloper.PSClassManagement.view.tm.TeacherTm;
 import com.jfoenix.controls.JFXButton;
-import com.sun.javafx.collections.ImmutableObservableList;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static javafx.scene.control.ButtonType.NO;
 import static javafx.scene.control.ButtonType.YES;
 
 public class StudentFormController {
@@ -87,7 +81,6 @@ public class StudentFormController {
                 }));
             }
             tbl.setItems(studentTms);
-
     }
 
     private void deleteStudent(String text) {
@@ -100,7 +93,7 @@ public class StudentFormController {
             preparedStatement.setInt(1,Integer.parseInt(text));
             if(preparedStatement.executeUpdate()>0){
                 new Alert(Alert.AlertType.CONFIRMATION,"Student Deleted!").show();
-                loadAllStudents("");
+                loadAllStudents(searchText);
                 clearField();
             }else {
                 new Alert(Alert.AlertType.WARNING,"Not Deleted.Try Again!").show();
@@ -128,7 +121,7 @@ public class StudentFormController {
                 preparedStatement.setInt(4,Integer.parseInt(txtGrade.getText()));
                 if(preparedStatement.executeUpdate()>0){
                     new Alert(Alert.AlertType.CONFIRMATION,"Student Saved").show();
-                    loadAllStudents("");
+                    loadAllStudents(searchText);
                     clearField();
                     txtStudentId.setText(String.valueOf(getLastId()));
                 }else {
@@ -144,7 +137,7 @@ public class StudentFormController {
                 preparedStatement.setInt(3,Integer.parseInt(txtStudentId.getText()));
                 if(preparedStatement.executeUpdate()>0){
                     new Alert(Alert.AlertType.CONFIRMATION,"Student Updated!").show();
-                    loadAllStudents("");
+                    loadAllStudents(searchText);
                     clearField();
                 }else {
                     new Alert(Alert.AlertType.WARNING,"Try Again!").show();
