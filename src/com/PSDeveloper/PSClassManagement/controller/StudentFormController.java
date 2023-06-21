@@ -1,4 +1,5 @@
 package com.PSDeveloper.PSClassManagement.controller;
+import com.PSDeveloper.PSClassManagement.db.DbConnection;
 import com.PSDeveloper.PSClassManagement.model.Student;
 import com.PSDeveloper.PSClassManagement.view.tm.StudentTm;
 import com.jfoenix.controls.JFXButton;
@@ -169,12 +170,8 @@ public class StudentFormController {
         return studentData;
     }
     public static List<Student> searchStudent(String text) throws ClassNotFoundException, SQLException {
-        //text="%"+text+"%";
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection=DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/PC_ClassManage","root","1234");
         String sql="SELECT * FROM student WHERE email LIKE ? || full_name LIKE ?";
-        PreparedStatement preparedStatement=connection.prepareStatement(sql);
+        PreparedStatement preparedStatement= DbConnection.getInstance().getConnection().prepareStatement(sql);
         preparedStatement.setString(1,"%"+text+"%");
         preparedStatement.setString(2,"%"+text+"%");
         ResultSet resultSet= preparedStatement.executeQuery();
@@ -189,8 +186,6 @@ public class StudentFormController {
         }
         return students;
     }
-
-
     public void btnNewStudentOnAction(ActionEvent actionEvent) {
         clearField();
         txtEmail.setEditable(true);
@@ -198,11 +193,8 @@ public class StudentFormController {
     }
     public static int getLastId(){
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection= DriverManager.getConnection("jdbc:mysql://localhost:3306/PC_ClassManage",
-                    "root","1234");
             String sql="SELECT id FROM student ORDER BY id DESC LIMIT 1";
-            PreparedStatement preparedStatement=connection.prepareStatement(sql);
+            PreparedStatement preparedStatement=DbConnection.getInstance().getConnection().prepareStatement(sql);
             ResultSet resultSet=preparedStatement.executeQuery();
             if(resultSet.next()){
                 return (resultSet.getInt(1)+1);

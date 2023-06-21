@@ -1,4 +1,5 @@
 package com.PSDeveloper.PSClassManagement.controller;
+import com.PSDeveloper.PSClassManagement.db.DbConnection;
 import com.PSDeveloper.PSClassManagement.model.Programme;
 import com.PSDeveloper.PSClassManagement.view.tm.ProgrammeTm;
 import com.jfoenix.controls.JFXButton;
@@ -68,11 +69,8 @@ public class ProgrammeFormController {
 
     public void btnSaveProgrammeOnAction(ActionEvent actionEvent) throws ClassNotFoundException, SQLException {
         if (btnSaveUpdate.getText().equals("Save Programme")){
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection= DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/PC_ClassManage","root","1234");
             String sql="INSERT INTO programme VALUES (?,?,?,?)";
-            PreparedStatement preparedStatement=connection.prepareStatement(sql);
+            PreparedStatement preparedStatement= DbConnection.getInstance().getConnection().prepareStatement(sql);
             preparedStatement.setInt(1,getLastId());
             preparedStatement.setString(2,txtProgrammeName.getText());
             preparedStatement.setString(3,txtProgrammeDesc.getText());
@@ -85,11 +83,8 @@ public class ProgrammeFormController {
                 new Alert(Alert.AlertType.WARNING,"Try Again!").show();
             }
         }else {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection= DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/PC_ClassManage","root","1234");
             String sql="UPDATE programme SET programme_name=?,programme_description=? WHERE p_id=?";
-            PreparedStatement preparedStatement=connection.prepareStatement(sql);
+            PreparedStatement preparedStatement=DbConnection.getInstance().getConnection().prepareStatement(sql);
             preparedStatement.setString(1,txtProgrammeName.getText());
             preparedStatement.setString(2,txtProgrammeDesc.getText());
             preparedStatement.setInt(3,Integer.parseInt(txtProgramme.getText()));
@@ -128,13 +123,11 @@ public class ProgrammeFormController {
 
 
     public void btnNewProgrammeOnAction(ActionEvent actionEvent) {
+        clearField();
     }
     public static List<Programme> findAllProgrammes() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection=DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/PC_ClassManage","root","1234");
         String sql="SELECT * FROM programme";
-        PreparedStatement preparedStatement= connection.prepareStatement(sql);
+        PreparedStatement preparedStatement= DbConnection.getInstance().getConnection().prepareStatement(sql);
         ResultSet resultSet= preparedStatement.executeQuery();
         List<Programme> programmeData=new ArrayList<>();
         while (resultSet.next()){
@@ -148,11 +141,8 @@ public class ProgrammeFormController {
         return programmeData;
     }
     public static List<Programme> searchProgramme(String text) throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection=DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/PC_ClassManage","root","1234");
         String sql="SELECT * FROM programme WHERE programme_name LIKE ?";
-        PreparedStatement preparedStatement=connection.prepareStatement(sql);
+        PreparedStatement preparedStatement=DbConnection.getInstance().getConnection().prepareStatement(sql);
         preparedStatement.setString(1,"%"+text+"%");
         ResultSet resultSet= preparedStatement.executeQuery();
         List<Programme> programmes=new ArrayList<>();
@@ -168,11 +158,8 @@ public class ProgrammeFormController {
     }
     private void deleteProgramme(String text) {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection=DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/PC_ClassManage","root","1234");
             String sql="DELETE FROM programme WHERE p_id=?";
-            PreparedStatement preparedStatement=connection.prepareStatement(sql);
+            PreparedStatement preparedStatement=DbConnection.getInstance().getConnection().prepareStatement(sql);
             preparedStatement.setInt(1,Integer.parseInt(text));
             if(preparedStatement.executeUpdate()>0){
                 new Alert(Alert.AlertType.CONFIRMATION,"Programme Deleted!").show();
@@ -187,11 +174,8 @@ public class ProgrammeFormController {
     }
     public static int getLastId(){
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection= DriverManager.getConnection("jdbc:mysql://localhost:3306/PC_ClassManage",
-                    "root","1234");
             String sql="SELECT p_id FROM programme ORDER BY p_id DESC LIMIT 1";
-            PreparedStatement preparedStatement=connection.prepareStatement(sql);
+            PreparedStatement preparedStatement=DbConnection.getInstance().getConnection().prepareStatement(sql);
             ResultSet resultSet=preparedStatement.executeQuery();
             if(resultSet.next()){
                 return (resultSet.getInt(1)+1);

@@ -1,5 +1,6 @@
 package com.PSDeveloper.PSClassManagement.controller;
 
+import com.PSDeveloper.PSClassManagement.db.DbConnection;
 import com.PSDeveloper.PSClassManagement.model.Teacher;
 import com.PSDeveloper.PSClassManagement.view.tm.TeacherTm;
 import com.jfoenix.controls.JFXButton;
@@ -123,11 +124,8 @@ public class TeachersFormController {
     public void btnSaveTeacherOnAction(ActionEvent actionEvent) {
         try {
             if(btnSaveUpdate.getText().equals("Save Teacher")){
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection connection= DriverManager.getConnection(
-                        "jdbc:mysql://localhost:3306/PC_ClassManage","root","1234");
                 String sql="INSERT INTO teacher VALUES (?,?,?,?,?)";
-                PreparedStatement preparedStatement=connection.prepareStatement(sql);
+                PreparedStatement preparedStatement= DbConnection.getInstance().getConnection().prepareStatement(sql);
                 preparedStatement.setInt(1, getLastId());
                 preparedStatement.setString(2,txtEmail.getText());
                 preparedStatement.setString(3,txtFullName.getText());
@@ -141,10 +139,8 @@ public class TeachersFormController {
                     new Alert(Alert.AlertType.WARNING,"Try again!").show();
                 }
             }else {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection connection= DriverManager.getConnection("jdbc:mysql://localhost:3306/PC_ClassManage","root","1234");
                 String sql="UPDATE teacher SET full_name=?, teaching_programme=? WHERE t_id=?";
-                PreparedStatement preparedStatement=connection.prepareStatement(sql);
+                PreparedStatement preparedStatement=DbConnection.getInstance().getConnection().prepareStatement(sql);
                 preparedStatement.setString(1,txtFullName.getText());
                 preparedStatement.setString(2,choice);
                 preparedStatement.setInt(3,Integer.parseInt(txtTeacherId.getText()));
@@ -163,10 +159,8 @@ public class TeachersFormController {
     }
 
     public static List<Teacher> findAllTeachers() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/PC_ClassManage","root","1234");
         String sql="SELECT * FROM teacher";
-        PreparedStatement preparedStatement= connection.prepareStatement(sql);
+        PreparedStatement preparedStatement= DbConnection.getInstance().getConnection().prepareStatement(sql);
         ResultSet resultSet= preparedStatement.executeQuery();
         List<Teacher> teacherData=new ArrayList<>();
         while (resultSet.next()){
@@ -182,11 +176,8 @@ public class TeachersFormController {
     }
     private void deleteTeacher(String text) {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection=DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/PC_ClassManage","root","1234");
             String sql="DELETE FROM teacher WHERE t_id=?";
-            PreparedStatement preparedStatement=connection.prepareStatement(sql);
+            PreparedStatement preparedStatement=DbConnection.getInstance().getConnection().prepareStatement(sql);
             preparedStatement.setInt(1,Integer.parseInt(text));
             if(preparedStatement.executeUpdate()>0){
                 new Alert(Alert.AlertType.CONFIRMATION,"Student Deleted!").show();
@@ -200,12 +191,8 @@ public class TeachersFormController {
         }
     }
     public static List<Teacher> searchTeacher(String text) throws ClassNotFoundException, SQLException {
-        //text="%"+text+"%";
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection=DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/PC_ClassManage","root","1234");
         String sql="SELECT * FROM teacher WHERE email LIKE ? || full_name LIKE ?";
-        PreparedStatement preparedStatement=connection.prepareStatement(sql);
+        PreparedStatement preparedStatement=DbConnection.getInstance().getConnection().prepareStatement(sql);
         preparedStatement.setString(1,"%"+text+"%");
         preparedStatement.setString(2,"%"+text+"%");
         ResultSet resultSet= preparedStatement.executeQuery();
@@ -228,11 +215,8 @@ public class TeachersFormController {
     }
     public static int getLastId(){
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection= DriverManager.getConnection("jdbc:mysql://localhost:3306/PC_ClassManage",
-                    "root","1234");
             String sql="SELECT t_id FROM teacher ORDER BY t_id DESC LIMIT 1";
-            PreparedStatement preparedStatement=connection.prepareStatement(sql);
+            PreparedStatement preparedStatement=DbConnection.getInstance().getConnection().prepareStatement(sql);
             ResultSet resultSet=preparedStatement.executeQuery();
             if(resultSet.next()){
                 return (resultSet.getInt(1)+1);
@@ -244,10 +228,8 @@ public class TeachersFormController {
         }
     }
     private ArrayList setChoiceBox() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/PC_ClassManage","root","1234");
         String sql="SELECT * FROM programme";
-        PreparedStatement preparedStatement= connection.prepareStatement(sql);
+        PreparedStatement preparedStatement= DbConnection.getInstance().getConnection().prepareStatement(sql);
         ResultSet resultSet= preparedStatement.executeQuery();
         ArrayList programmeData=new ArrayList<>();
         while (resultSet.next()){

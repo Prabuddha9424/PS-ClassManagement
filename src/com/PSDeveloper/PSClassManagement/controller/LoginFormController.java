@@ -1,5 +1,6 @@
 package com.PSDeveloper.PSClassManagement.controller;
 
+import com.PSDeveloper.PSClassManagement.db.DbConnection;
 import com.PSDeveloper.PSClassManagement.util.PasswordManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -20,11 +21,8 @@ public class LoginFormController {
 
     public void btnLoginOnAction(ActionEvent actionEvent) throws RuntimeException {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection= DriverManager.getConnection("jdbc:mysql://localhost:3306/PC_ClassManage",
-                    "root","1234");
             String sql="SELECT * FROM user WHERE email=?";
-            PreparedStatement preparedStatement=connection.prepareStatement(sql);
+            PreparedStatement preparedStatement= DbConnection.getInstance().getConnection().prepareStatement(sql);
             preparedStatement.setString(1,txtEmail.getText());
 
             ResultSet resultSet=preparedStatement.executeQuery();
